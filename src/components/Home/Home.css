@@ -1,0 +1,56 @@
+.app-container {
+  background-color: #4C49F5; 
+  min-height: 100vh; 
+  color: white; 
+}
+
+.centered-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.signUp {
+  transition-duration: 0.4s;
+  background-color: #4C49F5;
+  color: white;
+  border: 2px solid white; 
+  padding: 20px 80px; 
+  font-size: 24px; 
+  margin-top: 0px;
+  cursor: pointer;
+  margin-bottom:13%;
+}
+
+.signUp:hover {
+  background-color: white; 
+  color: #4C49F5;
+}
+
+
+
+.centered-container {
+  text-align: center; 
+  height: 80vh; 
+}
+
+
+.findMentors{
+  background-color:#0D266B;
+  color: white;
+  border: 2px solid #0D266B; 
+  border-radius: 10%;
+  padding: 10px 40px;
+  font-size: 24px; 
+  cursor: pointer;
+  margin-left: 500px;
+  
+}
+
+
+

@@ -1,0 +1,70 @@
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffff;
+  height: 4.6rem;
+  padding: 0 4.8rem;
+  /* padding: 10px 20px; */
+
+  color: #2647A3; 
+
+}
+
+.logo {
+  height: 2.2rem;
+}
+
+.main-nav-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 3.2rem; 
+}
+
+
+.main-nav-list li {
+  margin-right: 15px;
+}
+
+
+.main-nav-list li a {
+  text-decoration: none;
+  color: #2647A3; 
+  position: relative;
+  display: inline-block;
+  
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+}
+
+.main-nav-list li a span {
+  margin-top: 4px; /* Add margin to the top of the text */
+}
+
+.main-nav-list li a:hover {
+  color: #86b7fe; 
+}
+
+.icon {
+  margin-right: 5px;
+  color: #4C49F5; 
+  font-size: 24px; 
+  margin-right: 8px
+}
+
+
+.main-nav-list li a svg {
+  color: white; /* Set your desired color for the icons */
+  font-size: 24px; /* Set your desired font size for the icons */
+  margin-right: 10px; /* Adjust spacing between icon and text */
+}
+
+
+
+
+
+
