@@ -40,9 +40,9 @@ const RegistrationForm = () => {
       // Redirect to the authorization page
       console.log(response.data)
       
-      const token = localStorage.setItem("access", );
-      console.log("token", token);
-      navigate(`/authorization/qqqq/${token}`);
+      // const token = localStorage.setItem("access", );
+      // console.log("token", token);
+      navigate(`/ `);
     } catch (error) {
       console.error("Error registering user:", error.response.data);
       // Handle error (display error message, etc.)

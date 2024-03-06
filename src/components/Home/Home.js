@@ -7,7 +7,7 @@ import after_reg from "../../images/after_reg.png";
 import "./Home.css";
 
 const Home = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
 
   const handleSignUp = () => {
     // Logic for handling sign-up, e.g., redirecting to a sign-up page
