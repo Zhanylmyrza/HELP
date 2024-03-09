@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "del /s /q D:\\bez_straha\\auth_system\\backend\\build && react-scripts build && xcopy /s /e /i build D:\\bez_straha\\auth_system\\backend\\build",
+
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

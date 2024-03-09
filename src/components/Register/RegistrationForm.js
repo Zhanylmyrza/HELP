@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Register/Profile.css"
+import { signup } from "../../actions/auth";
+import { connect } from "react-redux";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({isAuthenticated,signup}) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,7 +23,7 @@ const RegistrationForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if passwords match
@@ -28,21 +31,12 @@ const RegistrationForm = () => {
       console.error("Passwords do not match");
       return;
     }
-
+    const {name, email, password, re_password} = formData
+    
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/auth/users/",
-        formData
-      );
-      console.log("User registration successful:", response.data);
-      const {} = response.data;
-      console.log(JSON.stringify(response.data, null, 2));
-      // Redirect to the authorization page
-      console.log(response.data)
+      signup(name, email, password, re_password);
       
-      // const token = localStorage.setItem("access", );
-      // console.log("token", token);
-      navigate(`/ `);
+      navigate(`/emailconfirm`);
     } catch (error) {
       console.error("Error registering user:", error.response.data);
       // Handle error (display error message, etc.)
@@ -50,57 +44,75 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <br />
+    <div className="profile-container">
+      <form  onSubmit={handleSubmit}>
 
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <br />
+        <label className="profile-form">
+          Email:
+          <input
+            type="email"
+            name="email"
+            className="input-field"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email "
+            required
+          />
+        </label>
 
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <br />
+        <label className="profile-form">
+          Name:
+          <input
+            type="text"
+            name="name"
+            className="input-field"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Name "
+            required
+          />
+        </label>
+        <br />
 
-      <label>
-        Confirm Password:
-        <input
-          type="password"
-          name="re_password"
-          value={formData.re_password}
-          onChange={handleChange}
-          required
-        />
-      </label>
+        <label className="profile-form">
+          Password:
+          <input
+            type="password"
+            name="password"
+            className="input-field"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password "
+            required
+          />
+        </label>
+        <br />
 
-      <button type="submit">Register</button>
-    </form>
+        <label className="profile-form">
+          Confirm Password:
+          <input
+            type="password"
+            name="re_password"
+            className="input-field"
+            value={formData.re_password}
+            onChange={handleChange}
+            placeholder="Confirm Password "
+            required
+          />
+        </label>
+
+        <button type="submit" className="save-button">
+          Register
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default RegistrationForm;
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signup })(RegistrationForm);
+

@@ -5,7 +5,7 @@ import tipa_logo from "../../images/tipa_logo.png";
 import { CiBookmark } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa";
 import { LuUserCircle2 } from "react-icons/lu";
-// import { TbMessages } from "react-icons/tb";
+import { TbMessages } from "react-icons/tb";
 import { PiUsersThree } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbDeviceTabletSearch } from "react-icons/tb";
@@ -39,7 +39,7 @@ function Navbar() {
             <Link to="/saved">Saved</Link>
           </li>
           <li>
-            {/*<TbMessages />*/}
+            <TbMessages />
             <Link to="/messages">Messages</Link>
           </li>
           <li>
@@ -51,4 +51,4 @@ function Navbar() {
     </header>
   );
 }
-export default Navbar;
+export default Navbar;  

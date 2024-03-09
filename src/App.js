@@ -11,9 +11,15 @@ import Messages from "./components/Messages/Messages";
 import Profile from "./components/Register/Profile";
 import RegistrationForm from "./components/Register/RegistrationForm";
 import ActivationComponent from "./components/Register/ActivationComponent";
+import Emailconfirm from "./components/Register/Emailconfirm";
+import Login from "./components/Register/Login";
+import { Provider } from "react-redux";
+import store from "./store";
+
 
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Navbar />
       <div className="app-container">
@@ -26,11 +32,14 @@ function App() {
           <Route path="/messages" Component={Messages} />
           <Route path="/profile" Component={Profile} />
           <Route path="/register" Component={RegistrationForm} />
-          <Route path="/authorization" Component={ActivationComponent} />
           <Route path="/activate/:uid/:token" Component={ActivationComponent} />
+          <Route path="/emailconfirm" Component={Emailconfirm} />
+          <Route path="/login" Component={Login} />
+
         </Routes>
       </div>
     </Router>
+    </Provider>
   );
 }
 

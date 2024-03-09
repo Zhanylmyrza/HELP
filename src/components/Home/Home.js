@@ -5,18 +5,18 @@ import About from "../About/About";
 import turasy_1 from "../../images/turasy_1.png";
 import after_reg from "../../images/after_reg.png";
 import "./Home.css";
+import { connect } from "react-redux";
 
-const Home = () => {
-  const [isRegistered, setIsRegistered] = useState(true);
-
+const Home = ({isAuthenticated}) => {
   const handleSignUp = () => {
     // Logic for handling sign-up, e.g., redirecting to a sign-up page
     console.log("Sign up logic here");
+
   };
 
   return (
     <div>
-      {isRegistered ? (
+      {isAuthenticated ? (
         <div>
           <div className="centered-image">
             <img src={after_reg} alt="img" />
@@ -42,4 +42,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Home);
