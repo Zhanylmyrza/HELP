@@ -10,7 +10,7 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
 
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
+    full_name: "",
     password: "",
     re_password: "",
   });
@@ -23,7 +23,7 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if passwords match
@@ -31,10 +31,10 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
       console.error("Passwords do not match");
       return;
     }
-    const {name, email, password, re_password} = formData
+    const {full_name, email, password, re_password} = formData
     
     try {
-      signup(name, email, password, re_password);
+      signup(full_name, email, password, re_password);
       
       navigate(`/emailconfirm`);
     } catch (error) {
@@ -61,14 +61,14 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
         </label>
 
         <label className="profile-form">
-          Name:
+        Full Name:
           <input
             type="text"
-            name="name"
+            name="full_name"
             className="input-field"
-            value={formData.name}
+            value={formData.full_name}
             onChange={handleChange}
-            placeholder="Name "
+            placeholder="Full name "
             required
           />
         </label>

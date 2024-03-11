@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { verify } from "../../actions/auth";
 import { connect } from "react-redux";
+import "../Register/Profile.css"
 
 const ActivationComponent = ({verify}) => {
   const [verified, setVerified] = useState(false);

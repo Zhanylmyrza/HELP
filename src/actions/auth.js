@@ -11,6 +11,8 @@ import {
   ACTIVATION_SUCCESS,
   ACTIVATION_FAIL,
   LOGOUT,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL,
 } from "./types";
 
 export const checkAuthenticated = () => async (dispatch) => {
@@ -118,13 +120,13 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const signup =
-  (name, email, password, re_password) => async (dispatch) => {
+  (full_name, email, password, re_password) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const body = JSON.stringify({ name, email, password, re_password });
+    const body = JSON.stringify({ full_name, email, password, re_password });
 
     try {
       const res = await axios.post(
@@ -132,6 +134,8 @@ export const signup =
         body,
         config
       );
+
+      console.log(res.data)
 
       dispatch({
         type: SIGNUP_SUCCESS,
@@ -141,6 +145,8 @@ export const signup =
       dispatch({
         type: SIGNUP_FAIL,
       });
+      
+      return Promise.reject()
     }
   };
 
@@ -174,3 +180,37 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
 };
+
+export const update_profile =
+  (profile, email) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(profile);
+  
+    try {
+      const res = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/person/${email}`,
+        body,
+        config
+      );
+
+      console.log('succcccccessssssss',res.data)
+
+      dispatch({
+        type: UPDATE_PROFILE_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log('errrrrrroooooorrrr', err)
+
+      dispatch({
+        type: UPDATE_PROFILE_FAIL,
+      });
+      
+      return Promise.reject()
+    }
+  };
+

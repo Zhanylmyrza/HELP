@@ -9,8 +9,13 @@ import { TbMessages } from "react-icons/tb";
 import { PiUsersThree } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbDeviceTabletSearch } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+
+  console.log('isAuthenticated', isAuthenticated)
+
   return (
     <header className="header">
       <Link to="/">
@@ -42,10 +47,11 @@ function Navbar() {
             <TbMessages />
             <Link to="/messages">Messages</Link>
           </li>
+          { isAuthenticated && 
           <li>
             <LuUserCircle2 />
             <Link to="/profile">Profile</Link>
-          </li>
+          </li> }
         </ul>
       </nav>
     </header>

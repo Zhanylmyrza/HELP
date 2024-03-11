@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
-import "./Profile.css"; 
+import "../Register/Profile.css"
 
 
 const Login = ({ login, isAuthenticated }) => {

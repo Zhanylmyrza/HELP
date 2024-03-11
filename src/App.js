@@ -8,13 +8,14 @@ import Mentors from "./components/Mentors/Mentors";
 import Mentees from "./components/Mentees/Mentees";
 import Saved from "./components/Saved/Saved";
 import Messages from "./components/Messages/Messages";
-import Profile from "./components/Register/Profile";
+import {Profile} from "./screens/Profile";
 import RegistrationForm from "./components/Register/RegistrationForm";
 import ActivationComponent from "./components/Register/ActivationComponent";
 import Emailconfirm from "./components/Register/Emailconfirm";
 import Login from "./components/Register/Login";
 import { Provider } from "react-redux";
 import store from "./store";
+import EditProfile from "./screens/EditProfile/EditProfile";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/saved" Component={Saved} />
           <Route path="/messages" Component={Messages} />
           <Route path="/profile" Component={Profile} />
+          <Route path="/edit-profile" Component={EditProfile} />
           <Route path="/register" Component={RegistrationForm} />
           <Route path="/activate/:uid/:token" Component={ActivationComponent} />
           <Route path="/emailconfirm" Component={Emailconfirm} />
