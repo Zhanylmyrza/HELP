@@ -1,0 +1,38 @@
+/* MemberItem.css */
+
+.member-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Three columns with equal width */
+    gap: 20px; /* Gap between items */
+    align-items: center; /* Center align items vertically */
+    background-color: #4C49F5; /* Light gray background */
+    padding: 20px; /* Padding around the content */
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.info {
+    grid-column: span 2; /* Span two columns for name and job title */
+    text-align: center;
+}
+
+
+
+.member-container:hover .details {
+    display: block; /* Show details on hover */
+}
+
+button {
+    grid-column: span 3; /* Span all three columns for the button */
+    margin-top: 10px; /* Add margin between button and details */
+}
+
+
+.card{
+    background-color: #fef5f5;
+    color: rgb(38, 82, 193);
+}

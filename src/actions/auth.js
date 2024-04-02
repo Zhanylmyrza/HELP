@@ -54,7 +54,7 @@ export const checkAuthenticated = () => async (dispatch) => {
   }
 };
 
-export const load_user = () => async (dispatch) => {
+export const load_user = (email) => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {
       headers: {
@@ -64,13 +64,12 @@ export const load_user = () => async (dispatch) => {
       },
     };
 
-
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/auth/users/me/`,
+        `${process.env.REACT_APP_API_URL}/person/${email}`,
         config
       );
-      console.log("res", res.data);
+      console.log("load_user res.data", res.data);
       dispatch({
         type: USER_LOADED_SUCCESS,
         payload: res.data,
@@ -111,7 +110,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(load_user());
+    dispatch(load_user(email));
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
@@ -185,15 +184,16 @@ export const update_profile =
   (profile, email) => async (dispatch) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": typeof profile.image === 'string' ? "application/json" : "multipart/form-data",
       },
     };
     const body = JSON.stringify(profile);
-  
+    console.log("Type", typeof profile.image === 'string', config)
+
     try {
       const res = await axios.patch(
         `${process.env.REACT_APP_API_URL}/person/${email}`,
-        body,
+        profile,
         config
       );
 
@@ -205,6 +205,7 @@ export const update_profile =
       });
     } catch (err) {
       console.log('errrrrrroooooorrrr', err)
+      console.log("Error Response data", err.response.data)
 
       dispatch({
         type: UPDATE_PROFILE_FAIL,
@@ -213,4 +214,6 @@ export const update_profile =
       return Promise.reject()
     }
   };
+
+
 
