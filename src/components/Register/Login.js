@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
-import "../Register/Login.css"
+import "./Login.css"
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -26,11 +26,11 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="log-container">
       <h1>Log In</h1>
       <p>Log into your Account</p>
       <form onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
+        <span className="form-group">
           <input
             className="form-control"
             type="email"
@@ -40,9 +40,10 @@ const Login = ({ login, isAuthenticated }) => {
             onChange={(e) => onChange(e)}
             required
           />
-        </div>
+        </span>
+        <br/>
 
-        <div className="form-group">
+        <span className="form-group">
           <input
             className="form-control"
             type="password"
@@ -53,13 +54,14 @@ const Login = ({ login, isAuthenticated }) => {
             minLength="6"
             required
           />
-        </div>
+        </span>
+
         <button className="btn btn-primary" type="submit">
           Login
         </button>
       </form>
       <p className="mt-3">
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
 
       

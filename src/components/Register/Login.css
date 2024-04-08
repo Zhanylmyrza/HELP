@@ -1,13 +1,14 @@
 /* Profile.css */
 
-.profile-container {
-    max-width: 900px;
+.log-container {
+    max-width: 250px;
     margin: 0 auto;
     margin-top: 150px;
     padding: 40px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
+    color:#005d8e;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   

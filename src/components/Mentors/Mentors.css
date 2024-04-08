@@ -7,6 +7,7 @@
     align-items: center; /* Center align items vertically */
     background-color: #4C49F5; /* Light gray background */
     padding: 20px; /* Padding around the content */
+    
 }
 
 .profile-image {
@@ -35,4 +36,35 @@ button {
 .card{
     background-color: #fef5f5;
     color: rgb(38, 82, 193);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    display: flex; /* Use flexbox */
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    text-align: center;
+
+}
+
+/* Additional styles for name and job title */
+h2, h3 {
+    margin: 5px 0; /* Add some margin above and below each heading */
+}
+
+.button-container {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.button-container button {
+    background-color: #4C49F5; 
+    color: #fff;
+    border: none;
+    border-radius: 50px; 
+    padding: 10px 20px; 
+    margin-right: 40px; 
+    margin-left: 20px;
+    width: 95px; 
 }

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -12,9 +13,7 @@ import { TbDeviceTabletSearch } from "react-icons/tb";
 import { useSelector } from "react-redux";
 
 function Navbar() {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
-
-  console.log('isAuthenticated', isAuthenticated)
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <header className="header">
@@ -47,14 +46,24 @@ function Navbar() {
             <TbMessages />
             <Link to="/messages">Messages</Link>
           </li>
-          { isAuthenticated && 
           <li>
-            <LuUserCircle2 />
-            <Link to="/profile">Profile</Link>
-          </li> }
+            {isAuthenticated ? (
+              <>
+                <LuUserCircle2 />
+                <Link to="/profile">Profile</Link>
+              </>
+            ) : (
+              <>
+                <LuUserCircle2 />
+                <Link to="/login">Login</Link>
+              </>
+            )}
+          </li>
         </ul>
       </nav>
     </header>
   );
 }
-export default Navbar;  
+export default Navbar;
+
+

@@ -64,10 +64,12 @@
 .profile-image {
   display: block;
   border-color: #005d8e;
-  width: 150px; /* Adjust image size */
-  height: 150px; /* Adjust image size */
+  width: 100px; /* Adjust image size */
+  height: 100px; /* Adjust image size */
   border-radius: 50%;
   object-fit: cover; /* Ensure image fills circular area */
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 .profile-image-input {
