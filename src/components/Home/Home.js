@@ -11,6 +11,7 @@ const Home = ({isAuthenticated}) => {
   const handleSignUp = () => {
     // Logic for handling sign-up, e.g., redirecting to a sign-up page
     console.log("Sign up logic here");
+    console.log("Let's begin a chat page")
 
   };
 
