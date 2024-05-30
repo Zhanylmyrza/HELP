@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #ffff;
-  height: 4.6rem;
+  height: 3.3rem;
   padding: 0 4.8rem;
   /* padding: 10px 20px; */
 
@@ -35,7 +35,7 @@
   color: #2647A3; 
   position: relative;
   display: inline-block;
-  
+  font-size: 12px;
   display: flex;
   align-items: center;
   flex-direction: column; 

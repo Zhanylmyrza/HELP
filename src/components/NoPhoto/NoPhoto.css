@@ -1,0 +1,33 @@
+.container-no-profile {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color:  #005d8e;
+    border: 1px solid  rgb(49, 49, 143);
+    color: white;
+    margin-top: 30px;
+}
+
+.contacts-no-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  #005d8e;
+    border: 1px solid  rgb(49, 49, 143);
+    color: white;
+    font-size: 10px;
+    border-color: #005d8e;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* div{
+    height: '100px'
+} */

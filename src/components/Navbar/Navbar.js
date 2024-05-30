@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
 import tipa_logo from "../../images/tipa_logo.png";
 import { CiBookmark } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa";
@@ -11,6 +10,7 @@ import { PiUsersThree } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbDeviceTabletSearch } from "react-icons/tb";
 import { useSelector } from "react-redux";
+import "./Navbar.css";
 
 function Navbar() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -26,11 +26,11 @@ function Navbar() {
             <IoHomeOutline />
             <Link to="/">Home</Link>
           </li>
-          <li>
+          { !isAuthenticated &&  <li>
             <TbDeviceTabletSearch />
             <Link to="/about">About</Link>
-          </li>
-          <li>
+          </li> }
+          {isAuthenticated &&  <><li>
             <FaUserTie />
             <Link to="/mentors">Mentors</Link>
           </li>
@@ -46,6 +46,8 @@ function Navbar() {
             <TbMessages />
             <Link to="/messages">Messages</Link>
           </li>
+          </>
+          }
           <li>
             {isAuthenticated ? (
               <>
