@@ -13,7 +13,7 @@ const Mentees = ({getPersonList}) => {
   },[])
   
   const {person} = useSelector(state => state.person)
-  console.log('person', person)
+  // console.log('person', person)
   const mentees = person.filter(item => !item.can_ask_for_help)
   
   return (

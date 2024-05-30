@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
 import "./Login.css"
+import { getPersonList } from "../../actions/memberAction";
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, getPersonList, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
 
+  useEffect(() => {
+    getPersonList()
+  },[])
+
+  
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.type]: e.target.value });
 
@@ -20,7 +26,6 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
-  
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }
@@ -29,6 +34,7 @@ const Login = ({ login, isAuthenticated }) => {
     <div className="log-container">
       <h1>Log In</h1>
       <p>Log into your Account</p>
+      <br/>
       <form onSubmit={(e) => onSubmit(e)}>
         <span className="form-group">
           <input
@@ -60,6 +66,7 @@ const Login = ({ login, isAuthenticated }) => {
           Login
         </button>
       </form>
+      <br/>
       <p className="mt-3">
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
@@ -73,4 +80,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, getPersonList })(Login);

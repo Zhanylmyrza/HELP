@@ -8,10 +8,21 @@ import {
 
 
 export const getPersonList = () => async (dispatch) => {
+
+  if (localStorage.getItem("access")) {
+    const config = {
+      headers: {
+        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
     try {
       dispatch({type: PERSON_LIST_REQUEST})
-      
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/person`)
+ 
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/person/`,
+        config
+      )
       console.log('PERSON List =====>', res.data)
       
       dispatch({
@@ -25,5 +36,8 @@ export const getPersonList = () => async (dispatch) => {
         payload: error.response && error.response.data.message ? error.response.data.message : error.message,
       })
     }
+  } else {
+    // TODO: Redirect to login page
+  }
   }
   

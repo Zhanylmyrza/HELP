@@ -54,7 +54,7 @@ export const checkAuthenticated = () => async (dispatch) => {
   }
 };
 
-export const load_user = (email) => async (dispatch) => {
+export const load_user = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {
       headers: {
@@ -64,12 +64,21 @@ export const load_user = (email) => async (dispatch) => {
       },
     };
 
+    
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/person/${email}`,
+      const currentUser = await axios.get(
+        `${process.env.REACT_APP_API_URL}/auth/users/me/`,
         config
       );
+      const userId = currentUser.data.id
+      
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/person/${userId}`,
+        config
+      );
+
       console.log("load_user res.data", res.data);
+
       dispatch({
         type: USER_LOADED_SUCCESS,
         payload: res.data,
@@ -77,7 +86,7 @@ export const load_user = (email) => async (dispatch) => {
     } catch (err) {
       console.log(
         "Error loading user:",
-        err.response ? err.response.data : err.message
+        err.response ? err.response.data : err.message,
       );
       dispatch({
         type: USER_LOADED_FAIL,
@@ -97,6 +106,7 @@ export const login = (email, password) => async (dispatch) => {
     },
   };
   const body = JSON.stringify({ email, password });
+  
 
   try {
     const res = await axios.post(
@@ -104,13 +114,14 @@ export const login = (email, password) => async (dispatch) => {
       body,
       config
     );
+    console.log('res.data', res.data)
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
 
-    dispatch(load_user(email));
+    dispatch(load_user());
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
@@ -128,17 +139,22 @@ export const signup =
     const body = JSON.stringify({ full_name, email, password, re_password });
 
     try {
+      // const res = await axios.post(
+      //   `${process.env.REACT_APP_API_URL}/auth/users/`,
+      //   body,
+      //   config
+      // );
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/users/`,
+        `/auth/users/`,
         body,
         config
       );
 
-      console.log(res.data)
+      console.log('USER REGISTERED',res.data)
 
       dispatch({
         type: SIGNUP_SUCCESS,
-        payload: res.data,
+        payload: res.data, //{email, full_name, id}
       });
     } catch (err) {
       dispatch({
@@ -174,6 +190,18 @@ export const verify = (uid, token) => async (dispatch) => {
   }
 };
 
+
+// Function to refresh the token
+// export const refreshToken = async () => {
+//   try {
+//     const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/refresh`, {refresh:''});
+//     return response.data; // Assumes the response contains the new token
+//   } catch (error) {
+//     console.error('Unable to refresh token', error);
+//     throw error;
+//   }
+// };
+
 export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
@@ -181,18 +209,16 @@ export const logout = () => (dispatch) => {
 };
 
 export const update_profile =
-  (profile, email) => async (dispatch) => {
+  (profile, id) => async (dispatch) => {
     const config = {
       headers: {
-        "Content-Type": typeof profile.image === 'string' ? "application/json" : "multipart/form-data",
+        "Content-Type": "multipart/form-data",
       },
     };
-    const body = JSON.stringify(profile);
-    console.log("Type", typeof profile.image === 'string', config)
 
     try {
       const res = await axios.patch(
-        `${process.env.REACT_APP_API_URL}/person/${email}`,
+        `${process.env.REACT_APP_API_URL}/person/${id}`,
         profile,
         config
       );

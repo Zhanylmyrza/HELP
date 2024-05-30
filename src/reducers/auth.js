@@ -12,6 +12,7 @@ import {
   LOGOUT,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
+  SAVE_PERSON_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -42,12 +43,23 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
+        user: payload,
       };
 
     case USER_LOADED_SUCCESS:
+      localStorage.setItem("user", JSON.stringify(payload))
       return {
         ...state,
         user: payload,
+      };
+
+    case SAVE_PERSON_SUCCESS:
+      const userNewData = { ...state.user, saved_persons: [...state.user.saved_persons, payload] };
+      localStorage.setItem("user", JSON.stringify(userNewData))
+
+      return {
+        ...state,
+        user: userNewData,
       };
     case AUTHENTICATED_FAIL:
       return {
@@ -72,14 +84,13 @@ export default function (state = initialState, action) {
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
     case LOGOUT:
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
+      localStorage.clear()
       return {
         ...state,
         access: null,
         refresh: null,
         isAuthenticated: false,
-        user: null,
+        user: {},
       };
     case ACTIVATION_SUCCESS:
     case ACTIVATION_FAIL:

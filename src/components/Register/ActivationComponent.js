@@ -20,15 +20,16 @@ const ActivationComponent = ({verify}) => {
   }
 
   return (
-    <div>
-      <h1>Activation in progress...</h1>
+    <div className="email_confirm">
+      
+      <p>Thank you for singing up with HELP! ,<br/> Please confirm your email address by clicking the link below </p>
       <button
           onClick={verify_account}
           style={{ marginTop: "50px" }}
           type="button"
-          className="btn btn-primary"
+          className="verify-button"
         >
-          Verify
+          Confirm Email
         </button>
     </div>
   );

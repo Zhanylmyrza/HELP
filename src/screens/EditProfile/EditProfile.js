@@ -1,17 +1,20 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EditProfile.css"; 
 import { connect, useSelector } from "react-redux";
 import { update_profile } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
+import NoPhoto from "../../components/NoPhoto/NoPhoto";
 
 
 const  EditProfile = ({update_profile}) => {
   const navigate = useNavigate();
 
   const profile = useSelector(state => state.auth.user)
+  console.log('profile',profile)
 
   const [profileData, setProfileData] = useState({
+
+    id: profile.id || null,
     full_name: profile.full_name || "",
     image: profile.image || "",
     job_title: profile.job_title || "",
@@ -25,6 +28,16 @@ const  EditProfile = ({update_profile}) => {
     email: profile.email || "",
     currency: profile.currency || "KGS",
   });
+
+  const [image, setImage] = useState(profileData.image)
+
+  useEffect(() => {
+    if(typeof profileData.image !== 'string'){
+      const imageUrl = URL.createObjectURL(profileData.image);
+
+      setImage(imageUrl)
+    }
+  },[profileData.image])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,9 +58,12 @@ const  EditProfile = ({update_profile}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(profileData.image)
+    update_profile({
+      ...profileData,
+      image: typeof profileData.image === 'string' ? null : profileData.image
+    }, profile.id);
 
-    update_profile(profileData, profile.email);
+
     navigate("/profile");
   };
 
@@ -56,15 +72,15 @@ const  EditProfile = ({update_profile}) => {
       ...prevData,
       image: e.target.files[0],
     }));
-  }
-  
+  } 
 
   return (
-    <div className="profile-container">
-      <form className="profile-form" onSubmit={handleSubmit}>
-
+    <div className="profile-container" style={{width:'40rem', marginTop:'20px'}}>
+      <form className="profile-form" onSubmit={handleSubmit} >
+        
         <div className="profile-image-container">
-            <img src={profileData.image} alt="profile" className="profile-image" />
+            {image ? <img src={image} alt="profile" className="profile-image" /> 
+            : <NoPhoto fullName={profileData.full_name} />}
             <input
               type="file"
               onChange={handleImage}

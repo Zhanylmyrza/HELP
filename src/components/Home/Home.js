@@ -11,6 +11,7 @@ const Home = ({isAuthenticated}) => {
   const handleSignUp = () => {
     // Logic for handling sign-up, e.g., redirecting to a sign-up page
     console.log("Sign up logic here");
+    console.log("Let's begin a chat page")
 
   };
 
@@ -19,16 +20,16 @@ const Home = ({isAuthenticated}) => {
       {isAuthenticated ? (
         <div>
           <div className="centered-image">
-            <img src={after_reg} alt="img" />
+            <img src={after_reg} alt="img"/>
           </div>
           <Link to="/mentors">
             <button className="findMentors">Find mentors</button>
           </Link>
         </div>
       ) : (
-        <div className="centered-container">
-          <div className="centered-image">
-            <img src={turasy_1} alt="img" />
+        <div className="centered-container" style={{paddingBottom:'30rem'}}>
+          <div className="centered-image" >
+            <img src={turasy_1} alt="img" style={{marginTop:'0px'}} />
           </div>
           <Link to="/register">
             <button className="signUp" onClick={handleSignUp}>
