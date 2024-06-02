@@ -18,14 +18,10 @@ export const Contacts = ({users, onContactSelect}) => {
                                             : <NoPhoto forContactPage={true} fullName={user.full_name} />}
                                         
 
-                                        <div class="divous meta" style={{ paddingRight: '234px', marginTop: '10px', display:'flex', alignItems:'center' }} onClick={() => onUserClick(user)}>                                        
-                                            {/* <td>
-                                                <a style={{ color: user.is_online ? 'green' : 'red' }} onClick={() => onUserClick(user)}>
-                                                     {user.full_name} 
-                                                </a>
-                                            </td> */}
-                                            <p class="name" style={{ color: user.is_online ? 'green' : '#a4a2f1' , marginTop: '15px'}} > {user.full_name} </p>
-                                            {/* <p class="preview">written the last messages... </p> */}
+                                        <div class="divous meta" style={{  display:'flex'}} onClick={() => onUserClick(user)}>                                        
+                    
+                                            <p class="name" style={{ color: user.is_online ? 'green' : '#a4a2f1' , marginTop: '20px', paddingRight: '200rem',  marginBottom:'20px' }} > {user.full_name} </p>
+
                                         </div>
                                         <hr />
                                     </tr>
