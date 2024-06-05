@@ -106,10 +106,10 @@ const MemberItem = ({user, showSaveButton= true, savePerson}) => {
                         <p>{user.cost_of_mentoring} {user.currency}/hour</p>
                     </span>
                     
-                    <span className='row'>
+                    {/* <span className='row'>
                         <label> Email: </label>
                         <p>{user.email}</p>
-                    </span>
+                    </span> */}
                     
                 </span>
                 <div className="member-item-button-container">

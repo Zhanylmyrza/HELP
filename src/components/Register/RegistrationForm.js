@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 const RegistrationForm = ({isAuthenticated,signup}) => {
   const navigate = useNavigate();
+  const [passwordError, setPasswordError] = useState(false)
 
   const [formData, setFormData] = useState({
     email: "",
@@ -29,6 +30,7 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
     // Check if passwords match
     if (formData.password !== formData.re_password) {
       console.error("Passwords do not match");
+      setPasswordError(true)
       return;
     }
     const {full_name, email, password, re_password} = formData
@@ -84,7 +86,9 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
             onChange={handleChange}
             placeholder="Password "
             required
+            style={passwordError ? {borderColor: 'red'} : {}}
           />
+         {passwordError && <p style={{color:'red'}}>Passwords do not match</p>}
         </label>
         <br />
 
@@ -98,7 +102,9 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
             onChange={handleChange}
             placeholder="Confirm Password "
             required
+            style={ passwordError ? {borderColor: 'red'} : {}}
           />
+          { passwordError && <p style={{color:'red'}}>Passwords do not match</p>}
         </label>
 
         <button type="submit" className="save-button">

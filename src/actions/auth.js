@@ -160,7 +160,8 @@ export const signup =
       dispatch({
         type: SIGNUP_FAIL,
       });
-      
+      console.log('USER CANT REGISTER', err)
+
       return Promise.reject()
     }
   };
