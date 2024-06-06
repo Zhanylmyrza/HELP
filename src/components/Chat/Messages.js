@@ -5,7 +5,7 @@ import { useChatScroll } from '../../utils/useChatScroll';
 
 export const Messages = ({receiver, isReceiverOnline, messages, socket}) => {
     const ref = useChatScroll(messages)
-    console.log('MESSAGES', messages)
+    console.log('MESSAGES', messages, receiver)
 
     const [messageText, setMessageText] = useState("")
 
@@ -52,7 +52,7 @@ export const Messages = ({receiver, isReceiverOnline, messages, socket}) => {
         <div >
             <div class="divous contact-profile">
                 <img src={receiver?.image} alt="" class="contact-image" style={{height: '25px', width: '25px'}} />
-                <p class="ml-2" style={{color: '#283761', marginTop:'5px', marginRight: '10px'}}>{receiver?.email}   |  </p>
+                <p class="ml-2" style={{color: '#283761', marginTop:'5px', marginRight: '10px'}}>{receiver?.full_name}   |  </p>
                 <p style={{color: '#283761', marginTop:'5px'}} >{isReceiverOnline ? 'Online' : 'Offline'}</p>           
             </div>
             <div className="chat-messages-row">
@@ -78,28 +78,5 @@ export const Messages = ({receiver, isReceiverOnline, messages, socket}) => {
         </div>
     );
 };
-
-
-
-
-// const [users, setUsers] = useState([]);
-//     const [messages, setMessages] = useState([]);
-//     const [currentUser, setCurrentUser] = useState(null);
-
-//     useEffect(() => {
-//         // Fetch users and messages from API endpoint
-//         // Example: axios.get('/api/users').then(response => setUsers(response.data));
-//         // Example: axios.get('/api/messages').then(response => setMessages(response.data));
-
-//         // For demo purposes, initializing some dummy data
-//         const dummyUsers = [{ email: 'user1@example.com' }, { email: 'user2@example.com' }];
-//         const dummyMessages = [{ message: 'Hello', sender: 'user1@example.com', timestamp: new Date() }];
-
-//         setUsers(dummyUsers);
-//         setMessages(dummyMessages);
-
-//         // Simulating current user
-//         setCurrentUser({ email: 'user1@example.com' });
-//     }, []);
 
 
