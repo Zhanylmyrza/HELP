@@ -58,6 +58,7 @@ const  EditProfile = ({update_profile}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('gaga',profileData.image)
     update_profile({
       ...profileData,
       image: typeof profileData.image === 'string' ? null : profileData.image

@@ -1,10 +1,12 @@
-import { connect, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+// import React from 'react';
+
+import { connect, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import { logout } from "../../actions/auth";
 import NoPhoto from "../../components/NoPhoto/NoPhoto";
 // import './Mentors.css';
-import '../../components/Mentors/Mentors.css'
+import '../../components/Mentors/Mentors.css';
 
 const Profile = ({logout}) => {
     const navigate = useNavigate()
@@ -34,7 +36,7 @@ const Profile = ({logout}) => {
         is_saved,
         currency,
     } = userData || {}; 
-    console.log('Currency', currency)
+    console.log('Currency image', image)
     return (
         
         <div className="center-container" >

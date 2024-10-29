@@ -14,6 +14,8 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
 } from "./types";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const checkAuthenticated = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
@@ -129,42 +131,51 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const signup =
-  (full_name, email, password, re_password) => async (dispatch) => {
+export const useSignup = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const signup = async (full_name, email, password, re_password) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     const body = JSON.stringify({ full_name, email, password, re_password });
 
+    setLoading(true);
+    setError(null); // Reset error state before making the request
+
     try {
-      // const res = await axios.post(
-      //   `${process.env.REACT_APP_API_URL}/auth/users/`,
-      //   body,
-      //   config
-      // );
       const res = await axios.post(
-        `/auth/users/`,
+        `${process.env.REACT_APP_API_URL}/auth/users/`,
         body,
         config
       );
 
-      console.log('USER REGISTERED',res.data)
+      console.log('USER REGISTERED', res.data);
 
       dispatch({
         type: SIGNUP_SUCCESS,
-        payload: res.data, //{email, full_name, id}
+        payload: res.data, // { email, full_name, id }
       });
     } catch (err) {
       dispatch({
         type: SIGNUP_FAIL,
       });
-      console.log('USER CANT REGISTER', err)
+      console.error('USER CANNOT REGISTER', err);
+      setError(err); // Set an error message
 
-      return Promise.reject()
+      return Promise.reject(err); // Return the error for further handling if needed
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
+
+  return { signup, loading, error };
+};
+
 
 export const verify = (uid, token) => async (dispatch) => {
   const config = {
@@ -232,7 +243,7 @@ export const update_profile =
       });
     } catch (err) {
       console.log('errrrrrroooooorrrr', err)
-      console.log("Error Response data", err.response.data)
+      console.log("Error Response data", err)
 
       dispatch({
         type: UPDATE_PROFILE_FAIL,

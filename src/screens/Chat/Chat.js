@@ -38,14 +38,14 @@ const Chat = ({  getPersonList, getChatHistory }) => {
     }, [chatHistory, receiver])
 
 
-    // useEffect(() => {
-    //     const ws = new WebSocket(
-    //         `ws://${'localhost:8000'}/ws/chat/${receiver?.id}/?token=${token}`
-    //     );
     useEffect(() => {
         const ws = new WebSocket(
-            `ws://${'34.132.9.23'}/ws/chat/${receiver?.id}/?token=${token}`
+            `ws://${'localhost:8000'}/ws/chat/${receiver?.id}/?token=${token}`
         );
+    // useEffect(() => {
+    //     const ws = new WebSocket(
+    //         `ws://${'34.132.9.23'}/ws/chat/${receiver?.id}/?token=${token}`
+    //     );
 
         ws.onopen = function(e) {
             console.log("CONNECTION ESTABLISHED");
@@ -76,14 +76,14 @@ const Chat = ({  getPersonList, getChatHistory }) => {
         };
     }, [receiver, token]);
 
-    // useEffect(() => {
-    //     const notifySocket = new WebSocket(
-    //         `ws://${'localhost:8000'}/ws/chat/notify/?token=${token}`
-    //     );
     useEffect(() => {
         const notifySocket = new WebSocket(
-            `ws://${'34.132.9.23'}/ws/chat/notify/?token=${token}`
+            `ws://${'localhost:8000'}/ws/chat/notify/?token=${token}`
         );
+    // useEffect(() => {
+    //     const notifySocket = new WebSocket(
+    //         `ws://${'34.132.9.23'}/ws/chat/notify/?token=${token}`
+    //     );
 
 
         notifySocket.onopen = function(e) {
@@ -105,14 +105,14 @@ const Chat = ({  getPersonList, getChatHistory }) => {
         };
     }, []);
 
-    // useEffect(() => {
-    //     const onlineStatus = new WebSocket(
-    //         `ws://${'localhost:8000'}/ws/chat/online/?token=${token}`
-    //     );
     useEffect(() => {
         const onlineStatus = new WebSocket(
-            `ws://${'34.132.9.23'}/ws/chat/online/?token=${token}`
+            `ws://${'localhost:8000'}/ws/chat/online/?token=${token}`
         );
+    // useEffect(() => {
+    //     const onlineStatus = new WebSocket(
+    //         `ws://${'34.132.9.23'}/ws/chat/online/?token=${token}`
+    //     );
 
         onlineStatus.onopen = function(e) {
             console.log("CONNECTED TO ONLINE CONSUMER");

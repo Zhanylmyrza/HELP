@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Register/Profile.css"
-import { signup } from "../../actions/auth";
+import { useSignup } from "../../actions/auth";
 import { connect } from "react-redux";
+import ReactLoading from 'react-loading';
 
-const RegistrationForm = ({isAuthenticated,signup}) => {
+const RegistrationForm = ({isAuthenticated}) => {
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState(false)
 
@@ -15,6 +16,8 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
     password: "",
     re_password: "",
   });
+  
+  const {signup, loading} = useSignup()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,25 +33,22 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
     // Check if passwords match
     if (formData.password !== formData.re_password) {
       console.error("Passwords do not match");
-      setPasswordError(true)
+      setPasswordError("Passwords do not match")
       return;
     }
     const {full_name, email, password, re_password} = formData
     
     try {
-      signup(full_name, email, password, re_password);
-      
+      await signup(full_name, email, password, re_password);
       navigate(`/emailconfirm`);
-    } catch (error) {
-      console.error("Error registering user:", error.response.data);
-      // Handle error (display error message, etc.)
+    } catch (err) {
+      setPasswordError(err?.response?.data?.password)
     }
   };
 
   return (
     <div className="profile-container">
       <form  onSubmit={handleSubmit}>
-
         <label className="profile-form">
           Email:
           <input
@@ -88,7 +88,7 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
             required
             style={passwordError ? {borderColor: 'red'} : {}}
           />
-         {passwordError && <p style={{color:'red'}}>Passwords do not match</p>}
+         {passwordError && <p style={{color:'red'}}>{passwordError}</p>}
         </label>
         <br />
 
@@ -104,11 +104,11 @@ const RegistrationForm = ({isAuthenticated,signup}) => {
             required
             style={ passwordError ? {borderColor: 'red'} : {}}
           />
-          { passwordError && <p style={{color:'red'}}>Passwords do not match</p>}
+          { passwordError && <p style={{color:'red'}}>{passwordError}</p>}
         </label>
 
         <button type="submit" className="save-button">
-          Register
+          {loading ? <ReactLoading type="spin" style={{backgroundColor:'#0073b1', color: 'white', width: 30}}/> : 'Register' } 
         </button>
       </form>
     </div>
@@ -120,5 +120,5 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { signup })(RegistrationForm);
+export default connect(mapStateToProps)(RegistrationForm);
 

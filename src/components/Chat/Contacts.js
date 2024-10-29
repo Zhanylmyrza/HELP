@@ -1,4 +1,6 @@
-import NoPhoto from "../NoPhoto/NoPhoto"
+// import React from 'react';
+
+import NoPhoto from "../NoPhoto/NoPhoto";
 import '../../screens/Chat/Chat.css';
 
 export const Contacts = ({users, onContactSelect}) => {
