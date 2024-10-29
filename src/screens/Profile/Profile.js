@@ -34,7 +34,7 @@ const Profile = ({logout}) => {
         free_times, 
         cost_of_mentoring, 
         is_saved,
-        currency,
+        // currency,
     } = userData || {}; 
     console.log('Currency image', image)
     return (
@@ -81,10 +81,16 @@ const Profile = ({logout}) => {
                         <p>{free_times}</p>
                     </span>
                     
-                    <span className='row'>
+                    {/* <span className='row'>
                         <label> Cost of mentoring: </label>
                         <p>{cost_of_mentoring} {currency}/hour</p>
+                    </span> */}
+
+                     <span className='row'>
+                        <label> Cost of mentoring: </label>
+                        <p>{cost_of_mentoring} USD/hour</p>
                     </span>
+
                     
                     <span className='row'>
                         <label> Email: </label>

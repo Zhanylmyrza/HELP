@@ -49,14 +49,14 @@ export const Messages = ({receiver, isReceiverOnline, messages, socket}) => {
     })};
 
     return (
-        <div >
+        <div>
             <div class="divous contact-profile">
                 <img src={receiver?.image} alt="" class="contact-image" style={{height: '25px', width: '25px'}} />
                 <p class="ml-2" style={{color: '#283761', marginTop:'5px', marginRight: '10px'}}>{receiver?.full_name}   |  </p>
                 <p style={{color: '#283761', marginTop:'5px'}} >{isReceiverOnline ? 'Online' : 'Offline'}</p>           
             </div>
-            <div className="chat-messages-row">
-                            <div className="messages chat-messages" style={{ backgroundColor: '#283761', overflowY: 'scroll' }} ref={ref}>
+            <div className="chat-messages-row messages">
+                            <div className="messages chat-messages" style={{ backgroundColor: '#283761', overflowY: 'scroll', height:480}} ref={ref}>
                                 <ul className="chat-messages-ul" >
                                     {renderMessages()}
                                 </ul>

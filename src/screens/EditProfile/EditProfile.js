@@ -26,7 +26,7 @@ const  EditProfile = ({update_profile}) => {
     cost_of_mentoring: profile.cost_of_mentoring || 0,
     is_saved: profile.is_saved || false,
     email: profile.email || "",
-    currency: profile.currency || "KGS",
+    // currency: profile.currency || "KGS",
   });
 
   const [image, setImage] = useState(profileData.image)
@@ -51,7 +51,7 @@ const  EditProfile = ({update_profile}) => {
   const handleCurrencyChange = (e) => {
     setProfileData((prevData) => ({
       ...prevData,
-      currency: e.target.value,
+      // currency: e.target.value,
     }));
   }
 
@@ -170,11 +170,11 @@ const  EditProfile = ({update_profile}) => {
         />
 
         
-        <select id="currency" name="currency" onChange={handleCurrencyChange}>
+        {/* <select id="currency" name="currency" onChange={handleCurrencyChange}>
           <option value="kgs">KGS</option>
           <option value="usd">USD</option>
-        </select>
-        <p>/hour</p>
+        </select> */}
+        <p> USD/hour</p>
 
         <button type="submit" className="save-button">
           Save Profile
